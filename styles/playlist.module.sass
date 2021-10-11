@@ -1,2 +1,56 @@
 .playlist
-    background: red
+    display: flex
+    flex-direction: column
+    &_controls
+        display: flex
+        justify-content: flex-end
+        padding: 10px
+        &_add
+            background: #fff
+            padding: 5px
+            border: 1px solid #ccc
+    &_header
+        display: flex
+        justify-content: flex-end
+        align-items: center
+        padding: 10px
+        box-sizing: border-box
+        &_name
+            margin-right: auto
+        &_edit,
+        &_remove
+            //font-size: 0
+            width: 40px
+            height: 40px
+            background: #fff
+            padding: 5px
+            display: flex
+            justify-content: center
+            align-items: center
+            border: 1px solid #ccc
+    &_list
+        padding: 10px
+        box-sizing: border-box
+        margin: 0
+        list-style: none
+        display: flex
+        flex-direction: column
+        li
+            display: grid
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr
+            grid-template-rows: 1fr
+            grid-gap: 0 10px
+            border-bottom: 1px solid #999
+            padding: 5px 0
+            &:last-of-type
+                border-bottom: none
+        &_headers
+            span
+                font-size: 12px
+                text-transform: uppercase
+                font-weight: bold
+        &_song
+            span
+                font-size: 10px
+
+
