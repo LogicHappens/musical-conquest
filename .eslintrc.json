@@ -5,7 +5,8 @@
     "es6": true
   },
   "plugins": [
-    "jest"
+    "jest",
+    "testing-library"
   ],
   "extends": [
     "eslint:recommended",
@@ -15,9 +16,20 @@
   ],
   "rules": {
     "jest/no-alias-methods": "off",
+    "jest/prefer-to-be": "off",
     "no-unused-vars": ["error", {
       "varsIgnorePattern": "^_",
       "argsIgnorePattern": "^_"
     }]
-  }
+  },
+  "overrides": [
+    // Only uses Testing Library lint rules in test files
+    {
+      "files": [
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }
