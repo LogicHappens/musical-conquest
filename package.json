@@ -13,6 +13,7 @@
     "test:coverage": "jest --collectCoverage"
   },
   "dependencies": {
+    "axios": "^0.22.0",
     "howler": "^2.2.3",
     "next": "11.1.2",
     "react": "17.0.2",
