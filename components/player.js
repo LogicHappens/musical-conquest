@@ -17,7 +17,9 @@ const Player = ({
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
-        <span className={styles.player_screen_songTimer}>10:53</span>
+        <span className={styles.player_screen_songTimer}>
+          {audio.duration()}
+        </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
         </span>
