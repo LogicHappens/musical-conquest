@@ -18,7 +18,7 @@ const Player = ({
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {audio.duration()}
+          {audio?.duration()}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
@@ -45,7 +45,9 @@ const Player = ({
           Stop
         </span>
         <span className={styles.player_controls_next}>Next</span>
-        <span className={styles.player_controls_progress}>Progress</span>
+        <span className={styles.player_controls_progress}>
+          {audio?.seek() || 0} of {audio?.duration() || 0}
+        </span>
       </span>
     </div>
   )
