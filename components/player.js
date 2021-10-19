@@ -1,12 +1,24 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/player.module.sass'
 import { Context } from '@/components/helpers/context'
 
 const Player = () => {
+  const [currentPlayed, setCurrentPlayed] = useState(0)
+
   const {
     audio,
     currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
   } = useContext(Context)
+
+  useEffect(() => {
+    const update = setInterval(() => {
+      setCurrentPlayed(Math.round(audio?.seek()) || 0)
+    }, 500)
+
+    return function cleanup() {
+      clearInterval(update)
+    }
+  }, [audio])
 
   return (
     <div className={styles.player}>
@@ -40,7 +52,7 @@ const Player = () => {
         </span>
         <span className={styles.player_controls_next}>Next</span>
         <span className={styles.player_controls_progress}>
-          {audio?.seek() || 0} of {audio?.duration() || 0}
+          {currentPlayed} of {audio?.duration() || 0}
         </span>
       </span>
     </div>
