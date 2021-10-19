@@ -10,8 +10,8 @@ import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 
 export default function Home() {
-  const { catalog, currentSongHash, setCurrentSong } = useContext(Context)
-  const [audio, setAudio] = useState()
+  const { audio, setAudio, catalog, currentSongHash, setCurrentSong } =
+    useContext(Context)
   const router = useRouter()
 
   const getUrlSongHash = useCallback(
@@ -23,8 +23,9 @@ export default function Home() {
 
   useEffect(() => {
     if (currentSongHash === '') return
-    const { song } = catalog.get(currentSongHash)
-    setCurrentSong(song)
+    const catalogItem = catalog.get(currentSongHash)
+    const { song } = catalogItem
+    setCurrentSong(catalogItem)
 
     const songUrl =
       SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
@@ -59,7 +60,7 @@ export default function Home() {
 
       <div className={styles.main}>
         <div className={styles.left}>
-          <Player song={currentSongHash} audio={audio} />
+          <Player />
           <SearchAndResults catalog={catalog} />
         </div>
         <div className={styles.right}>
