@@ -77,7 +77,7 @@ export default function Home() {
       <div className={styles.main}>
         <div className={styles.left}>
           <Player song={currentSong} audio={audio} />
-          <SearchAndResults />
+          <SearchAndResults catalog={catalog} />
         </div>
         <div className={styles.right}>
           <Playlist />
