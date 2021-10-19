@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.sass'
 import Player from '../components/player'
 import SearchAndResults from '../components/search-and-results'
 import Playlist from '../components/playlist'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   SONGS_BASE_URL,
   SONGS_LOCAL_STORAGE_KEY,
@@ -13,13 +13,19 @@ import axios from 'axios'
 import { musicFilenameParser } from '@/components/helpers/filename-parser'
 import { Howl } from 'howler'
 import { catalogSongs } from '@/components/helpers/catalog-songs'
+import { useRouter } from 'next/router'
 
 export default function Home() {
-  const [files, setFiles] = useState([])
   const [currentSong, setCurrentSong] = useState({})
   const [audio, setAudio] = useState()
+  const [catalog, setCatalog] = useState([])
+  const router = useRouter()
 
   const parseFiles = (files) => files.split('\n').map(musicFilenameParser)
+  const getSongUrl = useCallback(
+    () => router.asPath.split('/#')[1],
+    [router.asPath],
+  )
 
   useEffect(() => {
     const filenames = localStorage.getItem(SONGS_LOCAL_STORAGE_KEY)
@@ -27,17 +33,17 @@ export default function Home() {
       const songs = parseFiles(filenames)
       const catalog = catalogSongs(songs)
       const keys = Array.from(catalog.keys())
+      const loadKey = getSongUrl()
+      const loadExists = loadKey && catalog.has(loadKey)
       const randomKey = keys[Math.floor(Math.random() * keys.length)]
-      const randomSong = catalog.get(randomKey)
-
-      console.log(randomKey, 'RND', randomSong)
+      const songKey = loadExists ? loadKey : randomKey
+      const getSong = catalog.get(songKey)
 
       const songUrl =
         SONGS_BASE_URL +
-        encodeURIComponent(randomSong.song.filename) +
+        encodeURIComponent(getSong.song.filename) +
         '.' +
-        randomSong.song.extension
-      console.log('SONG URL', songUrl)
+        getSong.song.extension
 
       const audio = new Howl({
         src: [songUrl],
@@ -46,9 +52,11 @@ export default function Home() {
       })
       audio.play()
 
+      router.push(`/#${songKey}`, undefined, { shallow: true })
+
       setAudio(audio)
-      setFiles(songs)
-      setCurrentSong(randomSong)
+      setCatalog(catalog)
+      setCurrentSong(getSong)
       return
     }
 
