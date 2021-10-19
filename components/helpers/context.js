@@ -8,6 +8,7 @@ export const Context = createContext()
 
 export const Provider = ({ children }) => {
   const router = useRouter()
+  const [audio, setAudio] = useState()
   const [catalog, setCatalog] = useState([])
   const [currentSong, setCurrentSong] = useState()
   const [currentSongHash, setCurrentSongHash] = useState('')
@@ -41,6 +42,8 @@ export const Provider = ({ children }) => {
   }, [])
 
   const value = {
+    audio,
+    setAudio,
     catalog,
     currentSong,
     setCurrentSong,

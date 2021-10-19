@@ -1,19 +1,13 @@
+import { useContext } from 'react'
 import styles from '../styles/player.module.sass'
+import { Context } from '@/components/helpers/context'
 
-const Player = ({
-  song: {
-    song: {
-      artist = 'asdf',
-      song = 'qwerty',
-      hash1,
-      hash2,
-      filename,
-      extension,
-      isSong,
-    } = {},
-  } = {},
-  audio,
-}) => {
+const Player = () => {
+  const {
+    audio,
+    currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
+  } = useContext(Context)
+
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
