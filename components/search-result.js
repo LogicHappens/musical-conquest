@@ -1,11 +1,22 @@
+import { useContext } from 'react'
 import styles from '../styles/search.module.sass'
+import { Context } from '@/components/helpers/context'
 
-const SearchResult = ({ artist, songName }) => {
+const SearchResult = ({ hash, artist, songName }) => {
+  const { setCurrentSongHash } = useContext(Context)
+
+  const handlePlaySong = () => {
+    setCurrentSongHash(hash)
+  }
+
   return (
     <li className={styles.results_result}>
       <span className={styles.result_artist}>{artist}</span>
       <span className={styles.result_name}>{songName}</span>
       <span className={styles.result_actions}>
+        <button className={styles.result_actions_add} onClick={handlePlaySong}>
+          &gt;
+        </button>
         <a href="#" className={styles.result_actions_add}>
           +
         </a>

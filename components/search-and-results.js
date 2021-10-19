@@ -10,7 +10,12 @@ const SearchAndResults = ({ catalog }) => {
   const buildResults = (results) => {
     return results.map((result, i) => {
       return (
-        <SearchResult key={i} artist={result.artist} songName={result.song} />
+        <SearchResult
+          key={i}
+          hash={result.hash}
+          artist={result.artist}
+          songName={result.song}
+        />
       )
     })
   }
