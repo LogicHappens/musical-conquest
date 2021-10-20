@@ -61,7 +61,7 @@ export default function Home() {
       <div className={styles.main}>
         <div className={styles.left}>
           <Player />
-          <SearchAndResults catalog={catalog} />
+          <SearchAndResults />
         </div>
         <div className={styles.right}>
           <Playlist />
