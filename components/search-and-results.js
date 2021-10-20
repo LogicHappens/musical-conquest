@@ -24,7 +24,6 @@ const SearchAndResults = () => {
   )
 
   const pageEndIndex = useCallback(() => {
-    console.log('PP', perPage, 'PN', pageNumber)
     return perPage * pageNumber
   }, [pageNumber])
   const pageStartIndex = useCallback(
@@ -68,7 +67,6 @@ const SearchAndResults = () => {
   }, [matches.length])
 
   const buildResults = useCallback(() => {
-    console.log('START', pageStartIndex(), 'END', pageEndIndex())
     return matches.slice(pageStartIndex(), pageEndIndex()).map((result, i) => {
       return (
         <SearchResult
