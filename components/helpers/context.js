@@ -20,15 +20,20 @@ export const Provider = ({ children }) => {
     [router.asPath],
   )
 
+  const shuffleKey = useCallback(() => {
+    const keys = Array.from(catalog.keys())
+    const randomKey = keys[Math.floor(Math.random() * keys.length)]
+    return randomKey
+  }, [catalog])
+
   useEffect(() => {
     const filenames = localStorage.getItem(SONGS_LOCAL_STORAGE_KEY)
     if (filenames) {
       const songs = parseFiles(filenames)
       const catalog = catalogSongs(songs)
-      const keys = Array.from(catalog.keys())
       const loadKey = getUrlSongHash()
       const loadExists = loadKey && catalog.has(loadKey)
-      const randomKey = keys[Math.floor(Math.random() * keys.length)]
+      const randomKey = shuffleKey()
       const songKey = loadExists ? loadKey : randomKey
 
       setCatalog(catalog)
@@ -39,7 +44,11 @@ export const Provider = ({ children }) => {
     axios.get(SONGS_URL).then(({ data }) => {
       localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
     })
-  }, [])
+  }, [getUrlSongHash, shuffleKey])
+
+  const shuffle = () => {
+    setCurrentSongHash(shuffleKey())
+  }
 
   const value = {
     audio,
@@ -49,6 +58,7 @@ export const Provider = ({ children }) => {
     setCurrentSong,
     currentSongHash,
     setCurrentSongHash,
+    shuffle,
   }
 
   return <Context.Provider value={value}>{children}</Context.Provider>

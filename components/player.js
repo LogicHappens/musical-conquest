@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/player.module.sass'
 import { Context } from '@/components/helpers/context'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShuffle } from '@fortawesome/free-solid-svg-icons'
 
 const Player = () => {
   const [currentPlayed, setCurrentPlayed] = useState(0)
@@ -8,6 +10,7 @@ const Player = () => {
   const {
     audio,
     currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
+    shuffle,
   } = useContext(Context)
 
   useEffect(() => {
@@ -51,6 +54,11 @@ const Player = () => {
           Stop
         </span>
         <span className={styles.player_controls_next}>Next</span>
+        <FontAwesomeIcon
+          className={styles.icon}
+          icon={faShuffle}
+          onClick={shuffle}
+        />
         <span className={styles.player_controls_progress}>
           {currentPlayed} of {audio?.duration() || 0}
         </span>
