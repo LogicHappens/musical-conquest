@@ -15,7 +15,7 @@ const Player = () => {
 
   useEffect(() => {
     const update = setInterval(() => {
-      setCurrentPlayed(Math.round(audio?.seek()) || 0)
+      setCurrentPlayed(Math.round(audio.current?.seek()) || 0)
     }, 500)
 
     return function cleanup() {
@@ -27,7 +27,7 @@ const Player = () => {
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {audio?.duration()}
+          {audio.current?.duration()}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
@@ -37,19 +37,21 @@ const Player = () => {
         <span className={styles.player_controls_prev}>Prev</span>
         <span
           className={styles.player_controls_play}
-          onClick={() => audio.play()}
+          onClick={() => {
+            audio.current.play()
+          }}
         >
           Play
         </span>
         <span
           className={styles.player_controls_pause}
-          onClick={() => audio.pause()}
+          onClick={() => audio.current.pause()}
         >
           pause
         </span>
         <span
           className={styles.player_controls_stop}
-          onClick={() => audio.stop()}
+          onClick={() => audio.current.stop()}
         >
           Stop
         </span>
@@ -60,7 +62,7 @@ const Player = () => {
           onClick={shuffle}
         />
         <span className={styles.player_controls_progress}>
-          {currentPlayed} of {audio?.duration() || 0}
+          {currentPlayed} of {audio.current?.duration() || 0}
         </span>
       </span>
     </div>

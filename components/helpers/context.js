@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { createContext, useCallback, useEffect, useState } from 'react'
+import { createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { SONGS_LOCAL_STORAGE_KEY, SONGS_URL } from './constants'
 import { musicFilenameParser } from './filename-parser'
 import { catalogSongs } from './catalog-songs'
@@ -8,7 +8,7 @@ export const Context = createContext()
 
 export const Provider = ({ children }) => {
   const router = useRouter()
-  const [audio, setAudio] = useState()
+  const audio = useRef()
   const [catalog, setCatalog] = useState([])
   const [currentSong, setCurrentSong] = useState()
   const [currentSongHash, setCurrentSongHash] = useState('')
@@ -44,7 +44,7 @@ export const Provider = ({ children }) => {
     axios.get(SONGS_URL).then(({ data }) => {
       localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
     })
-  }, [getUrlSongHash, shuffleKey])
+  }, [])
 
   const shuffle = () => {
     setCurrentSongHash(shuffleKey())
@@ -52,7 +52,6 @@ export const Provider = ({ children }) => {
 
   const value = {
     audio,
-    setAudio,
     catalog,
     currentSong,
     setCurrentSong,

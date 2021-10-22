@@ -1,6 +1,8 @@
 import { useContext } from 'react'
 import styles from '../styles/search.module.sass'
 import { Context } from '@/components/helpers/context'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
 
 const SearchResult = ({ hash, artist, songName }) => {
   const { setCurrentSongHash } = useContext(Context)
@@ -15,7 +17,7 @@ const SearchResult = ({ hash, artist, songName }) => {
       <span className={styles.result_name}>{songName}</span>
       <span className={styles.result_actions}>
         <button className={styles.result_actions_add} onClick={handlePlaySong}>
-          &gt;
+          <FontAwesomeIcon icon={faPlay} />
         </button>
         <a href="#" className={styles.result_actions_add}>
           +

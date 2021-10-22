@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 
 export default function Home() {
-  const { audio, setAudio, catalog, currentSongHash, setCurrentSong } =
+  const { audio, catalog, currentSongHash, setCurrentSong } =
     useContext(Context)
   const router = useRouter()
 
@@ -30,7 +30,7 @@ export default function Home() {
     const songUrl =
       SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
 
-    if (audio) audio.unload()
+    if (audio.current) audio.current.unload()
     const howl = new Howl({
       src: [songUrl],
       html5: true,
@@ -38,17 +38,17 @@ export default function Home() {
     })
     howl.play()
 
-    setAudio(howl)
+    audio.current = howl
 
     if (lastHash !== song.hash) {
-      router.push(`/#${song.hash}`, undefined, { shallow: true })
       setLastHash(song.hash)
+      router.push(`/#${song.hash}`, undefined, { shallow: true })
     }
 
-    return function cleanup() {
-      howl.unload()
+    return () => {
+      audio.current.unload()
     }
-  }, [catalog, currentSongHash, lastHash, router, setCurrentSong])
+  }, [currentSongHash])
 
   return (
     <div className={styles.container}>
