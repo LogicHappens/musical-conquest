@@ -10,8 +10,14 @@ import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 
 export default function Home() {
-  const { audio, catalog, currentSongHash, setCurrentSong } =
-    useContext(Context)
+  const {
+    audio,
+    setAudio,
+    catalog,
+    currentSongHash,
+    currentSong,
+    setCurrentSong,
+  } = useContext(Context)
   const router = useRouter()
 
   const getUrlSongHash = useCallback(
@@ -23,22 +29,10 @@ export default function Home() {
 
   useEffect(() => {
     if (currentSongHash === '') return
+    console.log('INDEX CURRENT SONG HASH CHANGE')
     const catalogItem = catalog.get(currentSongHash)
     const { song } = catalogItem
     setCurrentSong(catalogItem)
-
-    const songUrl =
-      SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
-
-    if (audio.current) audio.current.unload()
-    const howl = new Howl({
-      src: [songUrl],
-      html5: true,
-      preload: 'metadata',
-    })
-    howl.play()
-
-    audio.current = howl
 
     if (lastHash !== song.hash) {
       setLastHash(song.hash)
@@ -46,9 +40,27 @@ export default function Home() {
     }
 
     return () => {
-      audio.current.unload()
+      if (audio !== undefined) audio.unload()
     }
   }, [currentSongHash])
+
+  useEffect(() => {
+    if (currentSong === undefined) return
+
+    const { song } = currentSong
+    const songUrl =
+      SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
+
+    if (audio) audio.unload()
+    const howl = new Howl({
+      src: [songUrl],
+      html5: true,
+      preload: 'metadata',
+    })
+    // howl.play()
+
+    setAudio(howl)
+  }, [currentSong])
 
   return (
     <div className={styles.container}>

@@ -3,19 +3,22 @@ import styles from '../styles/player.module.sass'
 import { Context } from '@/components/helpers/context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShuffle } from '@fortawesome/free-solid-svg-icons'
+import timeFormatter from './helpers/time-formatter'
 
 const Player = () => {
   const [currentPlayed, setCurrentPlayed] = useState(0)
+  const [duration, setDuration] = useState(0)
 
   const {
     audio,
+    currentSong,
     currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
     shuffle,
   } = useContext(Context)
 
   useEffect(() => {
     const update = setInterval(() => {
-      setCurrentPlayed(Math.round(audio.current?.seek()) || 0)
+      setCurrentPlayed(Math.round(audio?.seek()) || 0)
     }, 500)
 
     return function cleanup() {
@@ -23,11 +26,19 @@ const Player = () => {
     }
   }, [audio])
 
+  useEffect(() => {
+    if (currentSong === undefined || audio === undefined) return
+    audio.on('load', () => {
+      console.log('AUDIO', audio)
+      setDuration(audio?.duration())
+    })
+  }, [audio, currentSong])
+
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {audio.current?.duration()}
+          {timeFormatter(currentPlayed)} : {timeFormatter(duration)}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
@@ -38,20 +49,20 @@ const Player = () => {
         <span
           className={styles.player_controls_play}
           onClick={() => {
-            audio.current.play()
+            audio.play()
           }}
         >
           Play
         </span>
         <span
           className={styles.player_controls_pause}
-          onClick={() => audio.current.pause()}
+          onClick={() => audio.pause()}
         >
           pause
         </span>
         <span
           className={styles.player_controls_stop}
-          onClick={() => audio.current.stop()}
+          onClick={() => audio.stop()}
         >
           Stop
         </span>
@@ -61,9 +72,6 @@ const Player = () => {
           icon={faShuffle}
           onClick={shuffle}
         />
-        <span className={styles.player_controls_progress}>
-          {currentPlayed} of {audio.current?.duration() || 0}
-        </span>
       </span>
     </div>
   )

@@ -6,14 +6,14 @@ import { catalogSongs } from './catalog-songs'
 import { useRouter } from 'next/router'
 export const Context = createContext()
 
+const parseFiles = (files) => files.split('\n').map(musicFilenameParser)
+
 export const Provider = ({ children }) => {
   const router = useRouter()
-  const audio = useRef()
-  const [catalog, setCatalog] = useState([])
+  const [audio, setAudio] = useState()
+  const [catalog, setCatalog] = useState(new Map())
   const [currentSong, setCurrentSong] = useState()
   const [currentSongHash, setCurrentSongHash] = useState('')
-
-  const parseFiles = (files) => files.split('\n').map(musicFilenameParser)
 
   const getUrlSongHash = useCallback(
     () => router.asPath.split('/#')[1],
@@ -26,25 +26,39 @@ export const Provider = ({ children }) => {
     return randomKey
   }, [catalog])
 
+  // Load catalog
   useEffect(() => {
-    const filenames = localStorage.getItem(SONGS_LOCAL_STORAGE_KEY)
-    if (filenames) {
+    const catalogued = (filenames) => {
       const songs = parseFiles(filenames)
       const catalog = catalogSongs(songs)
-      const loadKey = getUrlSongHash()
-      const loadExists = loadKey && catalog.has(loadKey)
-      const randomKey = shuffleKey()
-      const songKey = loadExists ? loadKey : randomKey
-
-      setCatalog(catalog)
-      setCurrentSongHash(songKey)
-      return
+      return catalog
     }
 
-    axios.get(SONGS_URL).then(({ data }) => {
-      localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
-    })
+    const filenames = localStorage.getItem(SONGS_LOCAL_STORAGE_KEY)
+    if (filenames) {
+      const cataloguedSongs = catalogued(filenames)
+      setCatalog(cataloguedSongs)
+    } else {
+      axios.get(SONGS_URL).then(({ data }) => {
+        localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
+        const cataloguedSongs = catalogued(data)
+        setCatalog(cataloguedSongs)
+      })
+    }
   }, [])
+
+  // Load initial song key
+  useEffect(() => {
+    if (catalog.size === 0) return
+
+    console.log('CAT', catalog)
+
+    const loadKey = getUrlSongHash()
+    const loadExists = loadKey && catalog.has(loadKey)
+    const randomKey = shuffleKey()
+    const songKey = loadExists ? loadKey : randomKey
+    setCurrentSongHash(songKey)
+  }, [catalog, shuffleKey])
 
   const shuffle = () => {
     setCurrentSongHash(shuffleKey())
@@ -52,6 +66,7 @@ export const Provider = ({ children }) => {
 
   const value = {
     audio,
+    setAudio,
     catalog,
     currentSong,
     setCurrentSong,
