@@ -72,8 +72,10 @@ export default function Home() {
 
       <div className={styles.main}>
         <div className={styles.left}>
-          <Player />
-          <SearchAndResults />
+          <div className={styles.wrapper}>
+            <Player />
+            <SearchAndResults />
+          </div>
         </div>
         <div className={styles.right}>
           <Playlist />

@@ -38,13 +38,16 @@ const Player = () => {
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {timeFormatter(currentPlayed)} : {timeFormatter(duration)}
+          {timeFormatter(currentPlayed)} - {timeFormatter(duration)}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
         </span>
       </span>
       <span className={styles.player_controls}>
+        <div className={styles.player_controls_progressbar}>
+          <input className={styles.slider} type="range" min="1" max="100" defaultValue="1" />
+        </div>
         <span className={styles.player_controls_prev}>Prev</span>
         <span
           className={styles.player_controls_play}
@@ -67,11 +70,11 @@ const Player = () => {
           Stop
         </span>
         <span className={styles.player_controls_next}>Next</span>
-        <FontAwesomeIcon
-          className={styles.icon}
-          icon={faShuffle}
-          onClick={shuffle}
-        />
+        <span className={styles.player_controls_shuffle} onClick={shuffle}>Shuffle</span>
+        <span className={styles.player_controls_repeat}>Repeat</span>
+        <span className={styles.player_controls_volume}>
+          <input className={styles.slider} type="range" min="1" max="100" defaultValue="50" />
+        </span>
       </span>
     </div>
   )
