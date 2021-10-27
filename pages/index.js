@@ -38,7 +38,6 @@ export default function Home() {
     const songUrl =
       SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
 
-    if (audio) audio.unload()
     const howl = new Howl({
       src: [songUrl],
       html5: true,
@@ -49,7 +48,7 @@ export default function Home() {
     setAudio(howl)
 
     return () => {
-      if (audio !== undefined) audio.unload()
+      howl.unload()
     }
   }, [currentSong, setAudio])
 
