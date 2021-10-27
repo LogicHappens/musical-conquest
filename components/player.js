@@ -43,7 +43,13 @@ const Player = () => {
       </span>
       <span className={styles.player_controls}>
         <div className={styles.player_controls_progressbar}>
-          <input className={styles.slider} type="range" min="1" max="100" defaultValue="1" />
+          <input
+            className={styles.slider}
+            type="range"
+            min="1"
+            max="100"
+            defaultValue="1"
+          />
         </div>
         <span className={styles.player_controls_prev}>Prev</span>
         <span
@@ -67,10 +73,18 @@ const Player = () => {
           Stop
         </span>
         <span className={styles.player_controls_next}>Next</span>
-        <span className={styles.player_controls_shuffle} onClick={shuffle}>Shuffle</span>
+        <span className={styles.player_controls_shuffle} onClick={shuffle}>
+          Shuffle
+        </span>
         <span className={styles.player_controls_repeat}>Repeat</span>
         <span className={styles.player_controls_volume}>
-          <input className={styles.slider} type="range" min="1" max="100" defaultValue="50" />
+          <input
+            className={styles.slider}
+            type="range"
+            min="1"
+            max="100"
+            defaultValue="50"
+          />
         </span>
       </span>
     </div>

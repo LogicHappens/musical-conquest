@@ -5,16 +5,15 @@ import { Context } from '@/components/helpers/context'
 const SearchResult = ({ hash, artist, songName }) => {
   const { setCurrentSongHash } = useContext(Context)
 
-  const handlePlaySong = () => {
-    setCurrentSongHash(hash)
-  }
-
   return (
     <li className={styles.results_result}>
       <span className={styles.result_artist}>{artist}</span>
       <span className={styles.result_name}>{songName}</span>
       <span className={styles.result_actions}>
-        <button className={styles.result_actions_play} onClick={handlePlaySong}></button>
+        <button
+          className={styles.result_actions_play}
+          onClick={() => setCurrentSongHash(hash)}
+        ></button>
         <button className={styles.result_actions_add}></button>
       </span>
     </li>
