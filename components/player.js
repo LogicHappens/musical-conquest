@@ -29,7 +29,6 @@ const Player = () => {
   useEffect(() => {
     if (currentSong === undefined || audio === undefined) return
     audio.on('load', () => {
-      console.log('AUDIO', audio)
       setDuration(audio?.duration())
     })
   }, [audio, currentSong])

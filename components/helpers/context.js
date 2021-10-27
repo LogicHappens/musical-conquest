@@ -13,7 +13,7 @@ export const Provider = ({ children }) => {
   const [audio, setAudio] = useState()
   const [catalog, setCatalog] = useState(new Map())
   const [currentSong, setCurrentSong] = useState()
-  const [currentSongHash, setCurrentSongHash] = useState('')
+  const [currentSongHash, setCurrentSongHash] = useState()
 
   const getUrlSongHash = useCallback(
     () => router.asPath.split('/#')[1],
@@ -51,14 +51,19 @@ export const Provider = ({ children }) => {
   useEffect(() => {
     if (catalog.size === 0) return
 
-    console.log('CAT', catalog)
-
     const loadKey = getUrlSongHash()
     const loadExists = loadKey && catalog.has(loadKey)
     const randomKey = shuffleKey()
     const songKey = loadExists ? loadKey : randomKey
+
     setCurrentSongHash(songKey)
-  }, [catalog, shuffleKey])
+  }, [catalog, getUrlSongHash, shuffleKey])
+
+  // Load song from hash
+  useEffect(() => {
+    const catalogItem = catalog.get(currentSongHash)
+    setCurrentSong(catalogItem)
+  }, [catalog, currentSongHash])
 
   const shuffle = () => {
     setCurrentSongHash(shuffleKey())
