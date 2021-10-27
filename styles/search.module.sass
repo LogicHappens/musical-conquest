@@ -1,11 +1,29 @@
 .search
-    padding: 10px
+    padding: 20px
     box-sizing: border-box
+    width: 100%
     input
         width: 100%
         box-sizing: border-box
-        padding: 5px 10px
+        padding: 10px 10px
         font-size: 16px
+        background: url(../icons-search.svg) no-repeat scroll center right #eee
+        outline: none
+        border: none
+        color: #ccc
+        //border: 1px solid #ccc
+
+        &:hover,
+        &:active
+
+            background-color: #f7f7f7
+        &:focus
+            background-color: #fff
+            color: #000
+            &::placeholder
+                color: #000
+            //border: 1px solid #000
+
 .results
     padding: 10px
     box-sizing: border-box
@@ -13,25 +31,49 @@
     list-style: none
     display: flex
     flex-direction: column
+    background: #fff
     li
         display: grid
-        grid-template-columns: 1fr 1fr 1fr
+        grid-template-columns: 1fr 1fr 60px
         grid-template-rows: 1fr
         grid-gap: 0 10px
-        border-bottom: 1px solid #999
+        border-bottom: 1px solid #ccc
         padding: 5px 0
         align-items: center
         &:last-of-type
             border-bottom: none
+        span
+            &.result_actions
+                display: flex
+                gap: 0 5px
+                .result_actions_play
+                    background: url(../icons-play.svg) no-repeat scroll center center transparent
+                .result_actions_add
+                    background: url(../icons-add.svg) no-repeat scroll center center transparent
+                button
+                    border: none
+                    width: 20px
+                    height: 20px
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    background-color: #f9f9f9 !important
+                    &:hover
+                        cursor: pointer
+                        background-color: #fff !important
+                        filter: invert(100%)
+
     &_headers
         span
             font-size: 12px
             text-transform: uppercase
             font-weight: bold
 .result
-    &_artist
-    &_song
+    &_artist,
+    &_name
+        font-size: 12px
     &_actions
+        display: flex
         margin-left: auto
         a
             display: flex
@@ -45,14 +87,45 @@
             width: 30px
 
 .pagination
-    p
+    background: #fff
+    display: flex
+    flex-direction: column
+    align-items: center
+    .results_count
+        font-weight: 500
+        font-size: 14px
+        text-transform: capitalize
         text-align: center
-    ul
+    .pagination_buttons
         list-style: none
         display: flex
         padding: 0
         justify-content: center
         gap: 10px
+        button
+            &:hover
+                cursor: pointer
+                background-color: #f9f9f9 !important
+            display: flex
+            width: 40px
+            height: 40px
+            border-radius: 5px
+            border: none
+            justify-content: center
+            align-items: center
+            background-color: #fff !important
+            &.pagination_first
+                background: url(../icons-pagination-first.svg) no-repeat scroll center center
+            &.pagination_prev
+                background: url(../icons-pagination-prev.svg) no-repeat scroll center center
+            &.pagination_last
+                background: url(../icons-pagination-last.svg) no-repeat scroll center center
+            &.pagination_next
+                background: url(../icons-pagination-next.svg) no-repeat scroll center center
+            &.pagination_count
+                &:hover
+                    cursor: default
+                    background-color: #fff !important
     li
         border-radius: 5px
         width: 40px

@@ -13,14 +13,10 @@ const SearchResult = ({ hash, artist, songName }) => {
       <span className={styles.result_name}>{songName}</span>
       <span className={styles.result_actions}>
         <button
-          className={styles.result_actions_add}
+          className={styles.result_actions_play}
           onClick={() => setCurrentSongHash(hash)}
-        >
-          <FontAwesomeIcon icon={faPlay} />
-        </button>
-        <a href="#" className={styles.result_actions_add}>
-          +
-        </a>
+        ></button>
+        <button className={styles.result_actions_add}></button>
       </span>
     </li>
   )

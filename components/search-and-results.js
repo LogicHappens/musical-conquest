@@ -86,28 +86,16 @@ const SearchAndResults = () => {
 
   return (
     <div className={styles.search}>
-      <input
-        type="text"
-        placeholder="search..."
-        onChange={debounce(onSearchHandler, 500)}
-      ></input>
+      <input type="text" placeholder="search..." onChange={debounce(onSearchHandler, 500)}></input>
       <div className={styles.pagination}>
-        <p>{matchText()}</p>
-        <ul>
-          <li onClick={paginationHandlers.first}>
-            <FontAwesomeIcon icon={faAnglesLeft} />
-          </li>
-          <li onClick={paginationHandlers.previous}>
-            <FontAwesomeIcon icon={faAngleLeft} />
-          </li>
-          <li>{pageNumber}</li>
-          <li onClick={paginationHandlers.next}>
-            <FontAwesomeIcon icon={faAngleRight} />
-          </li>
-          <li onClick={paginationHandlers.last}>
-            <FontAwesomeIcon icon={faAnglesRight} />
-          </li>
-        </ul>
+        <p className={styles.results_count}>{matchText()}</p>
+        <div className={styles.pagination_buttons}>
+            <button onClick={paginationHandlers.first} className={styles.pagination_first}></button>
+            <button onClick={paginationHandlers.previous} className={styles.pagination_prev}></button>
+            <button className={styles.pagination_count}>{pageNumber}</button>
+            <button onClick={paginationHandlers.next} className={styles.pagination_next}></button>
+            <button onClick={paginationHandlers.last} className={styles.pagination_last}></button>
+        </div>
       </div>
       <ul className={styles.results}>
         <li className={(styles.results_result, styles.results_headers)}>
