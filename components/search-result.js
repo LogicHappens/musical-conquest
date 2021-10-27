@@ -7,16 +7,15 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 const SearchResult = ({ hash, artist, songName }) => {
   const { setCurrentSongHash } = useContext(Context)
 
-  const handlePlaySong = () => {
-    setCurrentSongHash(hash)
-  }
-
   return (
     <li className={styles.results_result}>
       <span className={styles.result_artist}>{artist}</span>
       <span className={styles.result_name}>{songName}</span>
       <span className={styles.result_actions}>
-        <button className={styles.result_actions_add} onClick={handlePlaySong}>
+        <button
+          className={styles.result_actions_add}
+          onClick={() => setCurrentSongHash(hash)}
+        >
           <FontAwesomeIcon icon={faPlay} />
         </button>
         <a href="#" className={styles.result_actions_add}>
