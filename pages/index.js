@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 
 export default function Home() {
-  const { audio, setAudio, currentSongHash, currentSong } = useContext(Context)
+  const { setAudio, currentSongHash, currentSong } = useContext(Context)
   const router = useRouter()
 
   const getUrlSongHash = useCallback(
