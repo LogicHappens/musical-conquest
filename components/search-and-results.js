@@ -3,13 +3,6 @@ import SearchResult from './search-result'
 import { debounce } from './helpers/debounce'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { Context } from '@/components/helpers/context'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faAngleLeft,
-  faAngleRight,
-  faAnglesLeft,
-  faAnglesRight,
-} from '@fortawesome/free-solid-svg-icons'
 
 const SearchAndResults = () => {
   const { catalog } = useContext(Context)

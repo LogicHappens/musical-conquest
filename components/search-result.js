@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import styles from '../styles/search.module.sass'
 import { Context } from '@/components/helpers/context'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
 
 const SearchResult = ({ hash, artist, songName }) => {
   const { setCurrentSongHash } = useContext(Context)

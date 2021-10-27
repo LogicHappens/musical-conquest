@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/player.module.sass'
 import { Context } from '@/components/helpers/context'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShuffle } from '@fortawesome/free-solid-svg-icons'
 import timeFormatter from './helpers/time-formatter'
 
 const Player = () => {
