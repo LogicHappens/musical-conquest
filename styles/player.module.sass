@@ -27,7 +27,6 @@
         &_progressbar
             width: 100%
 
-
         span
             padding: 5px
             border-radius: 5px
@@ -40,29 +39,28 @@
                 background-color: #f9f9f9
 
 
-
         &_prev
-            background: url(../icons-prev.svg) no-repeat scroll center center transparent
+            background: url(/icons/icons-prev.svg) no-repeat scroll center center transparent
             background-size: cover
         &_next
-            background: url(../icons-next.svg) no-repeat scroll center center transparent
+            background: url(/icons/icons-next.svg) no-repeat scroll center center transparent
             background-size: cover
         &_pause
-            background: url(../icons-pause.svg) no-repeat scroll center center transparent
+            background: url(/icons/icons-pause.svg) no-repeat scroll center center transparent
             background-size: cover
         &_stop
-            background: url(../icons-stop.svg) no-repeat scroll center center transparent
+            background: url(/icons/icons-stop.svg) no-repeat scroll center center transparent
             background-size: cover
         &_play
-            background: url(../icons-play.svg) no-repeat scroll center center transparent
+            background: url(/icons/icons-play.svg) no-repeat scroll center center transparent
             background-size: cover
         &_progress
             width: 100%
         &_shuffle
-            background: url(../icons-shuffle.svg) no-repeat scroll center center #FFF
+            background: url(/icons/icons-shuffle.svg) no-repeat scroll center center #FFF
             background-size: cover
         &_repeat
-            background: url(../icons-repeat.svg) no-repeat scroll center center #FFF
+            background: url(/icons/icons-repeat.svg) no-repeat scroll center center #FFF
             background-size: cover
 
         &_shuffle,
@@ -97,9 +95,18 @@
                     border-radius: 5px
                     background: #ccc
                     cursor: pointer
+<<<<<<< HEAD
             &:hover
                 background-color: transparent !important
 
+=======
+            &:active
+                .slider
+                    background: #000
+                    &::-webkit-slider-thumb,
+                    &::-moz-range-thumb
+                        background: #000
+>>>>>>> 84d8219b24001372e8c4e7163f7bffd42bfeac07
 
 .icon
     width: 45px
@@ -133,9 +140,3 @@
         border-radius: 5px
         background: #ddd
         cursor: pointer
-    &:active
-        //background: #000
-        &::-webkit-slider-thumb
-            background: #000
-        &::-moz-range-thumb
-            background: #000

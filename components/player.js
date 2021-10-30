@@ -4,38 +4,33 @@ import { Context } from '@/components/helpers/context'
 import timeFormatter from './helpers/time-formatter'
 
 const Player = () => {
-  const [currentPlayed, setCurrentPlayed] = useState(0)
-  const [duration, setDuration] = useState(0)
-
   const {
     audio,
-    currentSong,
-    currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
+    currentDuration,
+    duration,
+    currentSong: { song: { artist = '', song = '' } = {} } = {},
     shuffle,
+    play,
   } = useContext(Context)
 
-  useEffect(() => {
-    const update = setInterval(() => {
-      setCurrentPlayed(Math.round(audio?.seek()) || 0)
-    }, 500)
-
-    return function cleanup() {
-      clearInterval(update)
-    }
-  }, [audio])
+  const [currentProgress, setCurrentProgress] = useState(0)
+  const [scrubbing, setScrubbing] = useState(false)
 
   useEffect(() => {
-    if (currentSong === undefined || audio === undefined) return
-    audio.on('load', () => {
-      setDuration(audio?.duration())
-    })
-  }, [audio, currentSong])
+    if (!scrubbing) setCurrentProgress(currentDuration)
+  }, [currentDuration])
+
+  const sliderUpdate = (event) => {
+    const value = event.target.value
+    setCurrentProgress(value)
+    if (!scrubbing) audio.seek(value)
+  }
 
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {timeFormatter(currentPlayed)} - {timeFormatter(duration)}
+          {timeFormatter(currentDuration)} - {timeFormatter(duration)}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
@@ -46,18 +41,16 @@ const Player = () => {
           <input
             className={styles.slider}
             type="range"
-            min="1"
-            max="100"
-            defaultValue="1"
+            min={0}
+            max={duration}
+            onMouseDown={() => setScrubbing(true)}
+            onMouseUp={() => audio.seek(currentProgress) & setScrubbing(false)}
+            onChange={sliderUpdate}
+            value={currentProgress}
           />
         </div>
         <span className={styles.player_controls_prev}>Prev</span>
-        <span
-          className={styles.player_controls_play}
-          onClick={() => {
-            audio.play()
-          }}
-        >
+        <span className={styles.player_controls_play} onClick={play}>
           Play
         </span>
         <span
