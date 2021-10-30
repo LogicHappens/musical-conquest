@@ -18,6 +18,7 @@ module.exports = {
 
     // Handle module aliases
     '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@/lib/(.*)$': '<rootDir>/lib/$1',
   },
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',

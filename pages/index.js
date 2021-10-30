@@ -8,7 +8,7 @@ import { SONGS_BASE_URL } from '../components/helpers/constants'
 import { Howl } from 'howler'
 import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
-import { getRandomInt } from '../lib/random';
+import { getRandomInt } from '@/lib/random';
 
 export default function Home() {
   const { setAudio, currentSongHash, currentSong } = useContext(Context)
