@@ -1,8 +1,15 @@
+import { useCallback } from 'react'
 import styles from '../../styles/playlist.module.sass'
 import PlaylistHeader from './playlist-header'
 import PlaylistSong from './playlist-song'
 
-const Playlist = ({ title }) => {
+const Playlist = ({ title, catalogEntries }) => {
+  const playlistItems = useCallback(() => {
+    return catalogEntries.map((entry, i) => (
+      <PlaylistSong key={i} catalogEntry={entry} />
+    ))
+  }, [catalogEntries])
+
   return (
     <>
       <div className={styles.playlist_header}>
@@ -17,18 +24,7 @@ const Playlist = ({ title }) => {
 
       <ul className={styles.playlist_list}>
         <PlaylistHeader />
-        <PlaylistSong
-          catalogEntry={{
-            song: { artist: 'Jebus', song: 'Touch my tralala' },
-            images: ['pronz.jpg'],
-          }}
-        />
-        <PlaylistSong
-          catalogEntry={{
-            song: { artist: 'Jebus', song: 'Touch my tralala' },
-            images: ['pronz.jpg'],
-          }}
-        />
+        {playlistItems()}
       </ul>
     </>
   )
