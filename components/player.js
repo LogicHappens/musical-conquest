@@ -22,6 +22,10 @@ const Player = () => {
     setCurrentProgress(value)
   }
 
+  useEffect(() => {
+    setCurrentProgress(currentDuration)
+  }, [currentDuration])
+
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
