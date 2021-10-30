@@ -10,7 +10,7 @@ const SearchAndResults = () => {
   const [results, setResults] = useState(<></>)
   const [pageNumber, setPageNumber] = useState(1)
 
-  const perPage = 5
+  const perPage = 10
   const maxPages = useCallback(
     () => Math.ceil(matches.length / perPage),
     [matches.length],
@@ -79,41 +79,47 @@ const SearchAndResults = () => {
 
   return (
     <div className={styles.search}>
-      <input
-        type="text"
-        placeholder="search..."
-        onChange={debounce(onSearchHandler, 500)}
-      ></input>
-      <div className={styles.pagination}>
-        <p className={styles.results_count}>{matchText()}</p>
-        <div className={styles.pagination_buttons}>
-          <button
-            onClick={paginationHandlers.first}
-            className={styles.pagination_first}
-          ></button>
-          <button
-            onClick={paginationHandlers.previous}
-            className={styles.pagination_prev}
-          ></button>
-          <button className={styles.pagination_count}>{pageNumber}</button>
-          <button
-            onClick={paginationHandlers.next}
-            className={styles.pagination_next}
-          ></button>
-          <button
-            onClick={paginationHandlers.last}
-            className={styles.pagination_last}
-          ></button>
-        </div>
-      </div>
-      <ul className={styles.results}>
-        <li className={(styles.results_result, styles.results_headers)}>
-          <span className={styles.result_artist}>Artist</span>
-          <span className={styles.result_name}>Name</span>
-          <span className={styles.result_actions}>Actions</span>
-        </li>
-        {results}
-      </ul>
+      <input type="text" placeholder="search..." onChange={debounce(onSearchHandler, 500)} />
+
+        {results.length > 0 && (
+          <>
+            <span className={styles.search_status}></span>
+            <ul className={styles.results}>
+
+              <li className={(styles.results_result, styles.results_headers)}>
+                <span className={styles.result_artist}>Artist</span>
+                <span className={styles.result_name}>Name</span>
+                <span className={styles.result_actions}>Actions</span>
+              </li>
+
+              {results}
+            </ul>
+          <div className={styles.pagination}>
+            <p className={styles.results_count}>{matchText()}</p>
+            <div className={styles.pagination_buttons}>
+              <button
+                onClick={paginationHandlers.first}
+                className={styles.pagination_first}
+              ></button>
+              <button
+                onClick={paginationHandlers.previous}
+                className={styles.pagination_prev}
+              ></button>
+              <button className={styles.pagination_count}>{pageNumber}</button>
+              <button
+                onClick={paginationHandlers.next}
+                className={styles.pagination_next}
+              ></button>
+              <button
+                onClick={paginationHandlers.last}
+                className={styles.pagination_last}
+              ></button>
+            </div>
+          </div>
+          </>
+          )
+        }
+
     </div>
   )
 }
