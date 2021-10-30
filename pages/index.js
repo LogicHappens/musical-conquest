@@ -2,13 +2,13 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Player from '../components/player'
 import SearchAndResults from '../components/search-and-results'
-import Playlist from '../components/playlists'
+import Playlists from '../components/playlist/playlists'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { SONGS_BASE_URL } from '../components/helpers/constants'
 import { Howl } from 'howler'
 import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
-import { getRandomInt } from '@/lib/random';
+import { getRandomInt } from '@/lib/random'
 
 export default function Home() {
   const { setAudio, currentSongHash, currentSong } = useContext(Context)
@@ -68,7 +68,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <img src={randomImage()} className={styles.background_image} alt="Background image" />
+      <img
+        src={randomImage()}
+        className={styles.background_image}
+        alt="Background image"
+      />
 
       <div className={styles.main}>
         <div className={styles.left}>
@@ -78,7 +82,7 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.right}>
-          <Playlist />
+          <Playlists />
         </div>
       </div>
     </div>
