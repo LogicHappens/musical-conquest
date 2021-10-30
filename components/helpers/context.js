@@ -4,12 +4,15 @@ import { SONGS_LOCAL_STORAGE_KEY, SONGS_URL } from './constants'
 import { musicFilenameParser } from './filename-parser'
 import { catalogSongs } from './catalog-songs'
 import { useRouter } from 'next/router'
+import { Howl as _Howl } from 'howler'
 export const Context = createContext()
 
 const parseFiles = (files) => files.split('\n').map(musicFilenameParser)
 
 export const Provider = ({ children }) => {
   const router = useRouter()
+
+  /** @type {[_Howl]} */
   const [audio, setAudio] = useState()
   const [catalog, setCatalog] = useState(new Map())
   const [currentSong, setCurrentSong] = useState()

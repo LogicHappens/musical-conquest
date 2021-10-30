@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/player.module.sass'
 import { Context } from '@/components/helpers/context'
 import timeFormatter from './helpers/time-formatter'
+import { Howl as _Howl } from 'howler'
 
 const Player = () => {
+  /** @type {{audio: _Howl}} */
   const {
     audio,
     currentDuration,
@@ -18,7 +20,7 @@ const Player = () => {
 
   useEffect(() => {
     if (!scrubbing) setCurrentProgress(currentDuration)
-  }, [currentDuration])
+  }, [scrubbing, currentDuration])
 
   const sliderUpdate = (event) => {
     const value = event.target.value
@@ -74,9 +76,10 @@ const Player = () => {
           <input
             className={styles.slider}
             type="range"
-            min="1"
+            min="0"
             max="100"
-            defaultValue="50"
+            defaultValue="100"
+            onChange={(event) => audio.volume(event.target.value / 100)}
           />
         </span>
       </span>
