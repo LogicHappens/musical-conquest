@@ -14,6 +14,8 @@ export const Provider = ({ children }) => {
   const [catalog, setCatalog] = useState(new Map())
   const [currentSong, setCurrentSong] = useState()
   const [currentSongHash, setCurrentSongHash] = useState()
+  const [currentDuration, setCurrentDuration] = useState(0)
+  const [duration, setDuration] = useState(0)
 
   const getUrlSongHash = useCallback(
     () => router.asPath.split('/#')[1],
@@ -69,6 +71,26 @@ export const Provider = ({ children }) => {
     setCurrentSongHash(shuffleKey())
   }
 
+  const play = () => !audio.playing() && audio.play()
+
+  useEffect(() => {
+    if (audio === undefined) return
+
+    // Update currentDuration
+    const update = setInterval(() => {
+      setCurrentDuration(Math.round(audio?.seek()) || 0)
+    }, 500)
+
+    // Update duration
+    audio.on('load', () => {
+      setDuration(audio?.duration())
+    })
+
+    return function cleanup() {
+      clearInterval(update)
+    }
+  }, [audio])
+
   const value = {
     audio,
     setAudio,
@@ -77,7 +99,10 @@ export const Provider = ({ children }) => {
     setCurrentSong,
     currentSongHash,
     setCurrentSongHash,
+    currentDuration,
+    duration,
     shuffle,
+    play,
   }
 
   return <Context.Provider value={value}>{children}</Context.Provider>

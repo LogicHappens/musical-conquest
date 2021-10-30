@@ -4,38 +4,22 @@ import { Context } from '@/components/helpers/context'
 import timeFormatter from './helpers/time-formatter'
 
 const Player = () => {
-  const [currentPlayed, setCurrentPlayed] = useState(0)
   const [duration, setDuration] = useState(0)
 
   const {
     audio,
-    currentSong,
+    currentDuration,
+    duration,
     currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
     shuffle,
+    play,
   } = useContext(Context)
-
-  useEffect(() => {
-    const update = setInterval(() => {
-      setCurrentPlayed(Math.round(audio?.seek()) || 0)
-    }, 500)
-
-    return function cleanup() {
-      clearInterval(update)
-    }
-  }, [audio])
-
-  useEffect(() => {
-    if (currentSong === undefined || audio === undefined) return
-    audio.on('load', () => {
-      setDuration(audio?.duration())
-    })
-  }, [audio, currentSong])
 
   return (
     <div className={styles.player}>
       <span className={styles.player_screen}>
         <span className={styles.player_screen_songTimer}>
-          {timeFormatter(currentPlayed)} - {timeFormatter(duration)}
+          {timeFormatter(currentDuration)} - {timeFormatter(duration)}
         </span>
         <span className={styles.player_screen_songInfo}>
           {artist} - {song}
@@ -52,12 +36,7 @@ const Player = () => {
           />
         </div>
         <span className={styles.player_controls_prev}>Prev</span>
-        <span
-          className={styles.player_controls_play}
-          onClick={() => {
-            if (!audio.playing()) audio.play()
-          }}
-        >
+        <span className={styles.player_controls_play} onClick={play}>
           Play
         </span>
         <span
