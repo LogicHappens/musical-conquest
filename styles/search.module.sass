@@ -7,7 +7,7 @@
         box-sizing: border-box
         padding: 10px 10px
         font-size: 16px
-        background: url(../icons-search.svg) no-repeat scroll center right #eee
+        background: url(/icons/icons-search.svg) no-repeat scroll center right #eee
         outline: none
         border: none
         color: #ccc
@@ -47,9 +47,9 @@
                 display: flex
                 gap: 0 5px
                 .result_actions_play
-                    background: url(../icons-play.svg) no-repeat scroll center center transparent
+                    background: url(/icons/icons-play.svg) no-repeat scroll center center transparent
                 .result_actions_add
-                    background: url(../icons-add.svg) no-repeat scroll center center transparent
+                    background: url(/icons/icons-add.svg) no-repeat scroll center center transparent
                 button
                     border: none
                     width: 20px
@@ -103,9 +103,6 @@
         justify-content: center
         gap: 10px
         button
-            &:hover
-                cursor: pointer
-                background-color: #f9f9f9 !important
             display: flex
             width: 40px
             height: 40px
@@ -114,14 +111,18 @@
             justify-content: center
             align-items: center
             background-color: #fff !important
+            &:hover
+                cursor: pointer
+                background-color: #f9f9f9 !important
+
             &.pagination_first
-                background: url(../icons-pagination-first.svg) no-repeat scroll center center
+                background: url(/icons/icons-pagination-first.svg) no-repeat scroll center center
             &.pagination_prev
-                background: url(../icons-pagination-prev.svg) no-repeat scroll center center
+                background: url(/icons/icons-pagination-prev.svg) no-repeat scroll center center
             &.pagination_last
-                background: url(../icons-pagination-last.svg) no-repeat scroll center center
+                background: url(/icons/icons-pagination-last.svg) no-repeat scroll center center
             &.pagination_next
-                background: url(../icons-pagination-next.svg) no-repeat scroll center center
+                background: url(/icons/icons-pagination-next.svg) no-repeat scroll center center
             &.pagination_count
                 &:hover
                     cursor: default
