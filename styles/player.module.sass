@@ -33,15 +33,12 @@
             border-radius: 5px
             font-size: 0
             display: block
-            width: 45px
+            width: 40px
             height: 30px
             &:hover
                 cursor: pointer
                 background-color: #f9f9f9
-            &:active,
-            &.on
-                background-color: #fff
-                filter: invert(100%)
+
 
 
         &_prev
@@ -67,8 +64,19 @@
         &_repeat
             background: url(../icons-repeat.svg) no-repeat scroll center center #FFF
             background-size: cover
+
+        &_shuffle,
+        &_repeat
+            &:active,
+            &.on
+                background-color: #fff
+                filter: invert(100%)
         &_volume
             //background: pink
+            justify-content: center
+            align-items: center
+            display: flex
+            width: 90px !important
             .slider
                 width: 100%
                 border: none
@@ -77,24 +85,21 @@
                 &::-webkit-slider-thumb
                     -webkit-appearance: none
                     appearance: none
-                    width: 5px
-                    height: 25px
+                    width: 15px
+                    height: 15px
                     border-radius: 5px
-                    background: #ddd
+                    background: #ccc
                     cursor: pointer
 
                 &::-moz-range-thumb
-                    width: 5px
-                    height: 25px
+                    width: 15px
+                    height: 15px
                     border-radius: 5px
-                    background: #ddd
+                    background: #ccc
                     cursor: pointer
-            &:active
-                .slider
-                    background: #000©
-                    &::-webkit-slider-thumb,
-                    &::-moz-range-thumb
-                        background: #000
+            &:hover
+                background-color: transparent !important
+
 
 .icon
     width: 45px
@@ -116,15 +121,21 @@
     &::-webkit-slider-thumb
         -webkit-appearance: none
         appearance: none
-        width: 55px
-        height: 25px
+        width: 35px
+        height: 20px
         border-radius: 5px
         background: #ddd
         cursor: pointer
 
     &::-moz-range-thumb
-        width: 55px
-        height: 25px
+        width: 35px
+        height: 20px
         border-radius: 5px
         background: #ddd
         cursor: pointer
+    &:active
+        //background: #000
+        &::-webkit-slider-thumb
+            background: #000
+        &::-moz-range-thumb
+            background: #000
