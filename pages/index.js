@@ -60,6 +60,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <img
+        src={`${SONGS_BASE_URL}${currentSong?.images[0]?.filename}.${currentSong?.images[0]?.extension}`}
+        className={styles.background_image}
+      />
+
       <div className={styles.main}>
         <div className={styles.left}>
           <div className={styles.wrapper}>
