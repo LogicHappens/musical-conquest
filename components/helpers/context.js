@@ -67,12 +67,7 @@ export const Provider = ({ children }) => {
     setCurrentSong(catalogItem)
   }, [catalog, currentSongHash])
 
-  const shuffle = () => {
-    setCurrentSongHash(shuffleKey())
-  }
-
-  const play = () => !audio.playing() && audio.play()
-
+  // Durations
   useEffect(() => {
     if (audio === undefined) return
 
@@ -90,6 +85,10 @@ export const Provider = ({ children }) => {
       clearInterval(update)
     }
   }, [audio])
+
+  const shuffle = () => setCurrentSongHash(shuffleKey())
+
+  const play = () => !audio.playing() && audio.play()
 
   const value = {
     audio,

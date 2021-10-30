@@ -4,16 +4,27 @@ import { Context } from '@/components/helpers/context'
 import timeFormatter from './helpers/time-formatter'
 
 const Player = () => {
-  const [duration, setDuration] = useState(0)
-
   const {
     audio,
     currentDuration,
     duration,
-    currentSong: { song: { artist = 'LOADING', song = 'SONG' } = {} } = {},
+    currentSong: { song: { artist = '', song = '' } = {} } = {},
     shuffle,
     play,
   } = useContext(Context)
+
+  const [currentProgress, setCurrentProgress] = useState(0)
+  const [scrubbing, setScrubbing] = useState(false)
+
+  useEffect(() => {
+    if (!scrubbing) setCurrentProgress(currentDuration)
+  }, [currentDuration])
+
+  const sliderUpdate = (event) => {
+    const value = event.target.value
+    setCurrentProgress(value)
+    if (!scrubbing) audio.seek(value)
+  }
 
   return (
     <div className={styles.player}>
@@ -30,9 +41,12 @@ const Player = () => {
           <input
             className={styles.slider}
             type="range"
-            min="1"
-            max="100"
-            defaultValue="1"
+            min={0}
+            max={duration}
+            onMouseDown={() => setScrubbing(true)}
+            onMouseUp={() => audio.seek(currentProgress) & setScrubbing(false)}
+            onChange={sliderUpdate}
+            value={currentProgress}
           />
         </div>
         <span className={styles.player_controls_prev}>Prev</span>
