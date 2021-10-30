@@ -17,10 +17,14 @@
   "rules": {
     "jest/no-alias-methods": "off",
     "jest/prefer-to-be": "off",
-    "no-unused-vars": ["error", {
-      "varsIgnorePattern": "^_",
-      "argsIgnorePattern": "^_"
-    }]
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@next/next/no-img-element": "off"
   },
   "overrides": [
     // Only uses Testing Library lint rules in test files
@@ -29,7 +33,9 @@
         "**/__tests__/**/*.[jt]s?(x)",
         "**/?(*.)+(spec|test).[jt]s?(x)"
       ],
-      "extends": ["plugin:testing-library/react"]
+      "extends": [
+        "plugin:testing-library/react"
+      ]
     }
   ]
 }
