@@ -55,7 +55,7 @@ const Player = () => {
         <span
           className={styles.player_controls_play}
           onClick={() => {
-            audio.play()
+            if (!audio.playing()) audio.play()
           }}
         >
           Play
