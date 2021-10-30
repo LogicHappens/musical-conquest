@@ -16,16 +16,10 @@ const Player = () => {
   } = useContext(Context)
 
   const [currentProgress, setCurrentProgress] = useState(0)
-  const [scrubbing, setScrubbing] = useState(false)
-
-  useEffect(() => {
-    if (!scrubbing) setCurrentProgress(currentDuration)
-  }, [scrubbing, currentDuration])
 
   const sliderUpdate = (event) => {
     const value = event.target.value
     setCurrentProgress(value)
-    if (!scrubbing) audio.seek(value)
   }
 
   return (
@@ -45,8 +39,7 @@ const Player = () => {
             type="range"
             min={0}
             max={duration}
-            onMouseDown={() => setScrubbing(true)}
-            onMouseUp={() => audio.seek(currentProgress) & setScrubbing(false)}
+            onMouseUp={() => audio.seek(currentProgress)}
             onChange={sliderUpdate}
             value={currentProgress}
           />
