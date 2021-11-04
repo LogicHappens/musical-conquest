@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.sass'
 import Player from '../components/player'
 import SearchAndResults from '../components/search-and-results'
-import Playlists from '../components/playlist/playlists'
+// import Playlists from '../components/playlist/playlists'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { SONGS_BASE_URL } from '../components/helpers/constants'
 import { Howl } from 'howler'
@@ -81,9 +81,9 @@ export default function Home() {
             <SearchAndResults />
           </div>
         </div>
-        <div className={styles.right}>
+        {/* <div className={styles.right}>
           <Playlists />
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -48,7 +48,7 @@ const Player = () => {
             value={currentProgress}
           />
         </div>
-        <span className={styles.player_controls_prev}>Prev</span>
+        {/* <span className={styles.player_controls_prev}>Prev</span> */}
         <span className={styles.player_controls_play} onClick={play}>
           Play
         </span>
@@ -64,11 +64,11 @@ const Player = () => {
         >
           Stop
         </span>
-        <span className={styles.player_controls_next}>Next</span>
+        {/* <span className={styles.player_controls_next}>Next</span> */}
         <span className={styles.player_controls_shuffle} onClick={shuffle}>
           Shuffle
         </span>
-        <span className={styles.player_controls_repeat}>Repeat</span>
+        {/* <span className={styles.player_controls_repeat}>Repeat</span> */}
         <span className={styles.player_controls_volume}>
           <input
             className={styles.slider}
