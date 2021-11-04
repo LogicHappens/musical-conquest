@@ -44,7 +44,7 @@ export default function Home() {
       html5: true,
       preload: 'metadata',
     })
-    //howl.play()
+    howl.play()
 
     setAudio(howl)
 
