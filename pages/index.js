@@ -27,6 +27,14 @@ export default function Home() {
 
     if (lastHash !== currentSongHash) {
       setLastHash(currentSongHash)
+      /// Dirty <script> global from _app.js
+      // eslint-disable-next-line no-undef
+      if (typeof goatcounter !== 'undefined') {
+        // eslint-disable-next-line no-undef
+        goatcounter.count({
+          path: location.pathname + location.search + location.hash,
+        })
+      }
       router.push(`/#${currentSongHash}`, undefined, { shallow: true })
     }
   }, [currentSongHash, lastHash, router])
