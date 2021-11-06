@@ -3,7 +3,7 @@ import styles from '../styles/Home.module.sass'
 import Player from '../components/player'
 import SearchAndResults from '../components/search-and-results'
 // import Playlists from '../components/playlist/playlists'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { SONGS_BASE_URL } from '../components/helpers/constants'
 import { Howl } from 'howler'
 import { useRouter } from 'next/router'
@@ -43,9 +43,11 @@ export default function Home() {
   useEffect(() => {
     if (currentSong === undefined) return
 
-    const { song } = currentSong
+    const {
+      song: { filename, extension },
+    } = currentSong
     const songUrl =
-      SONGS_BASE_URL + encodeURIComponent(song.filename) + '.' + song.extension
+      SONGS_BASE_URL + encodeURIComponent(filename) + '.' + extension
 
     const howl = new Howl({
       src: [songUrl],
@@ -61,12 +63,12 @@ export default function Home() {
     }
   }, [currentSong, setAudio])
 
-  const randomImage = useCallback(() => {
-    if (!currentSong) return
+  const randomImage = useMemo(() => {
+    if (!currentSong?.images) return false
     const key = getRandomInt(0, currentSong?.images.length - 1)
     const image = currentSong?.images[key]
     return `${SONGS_BASE_URL}${image?.filename}.${image?.extension}`
-  }, [currentSong])
+  }, [currentSong?.images])
 
   return (
     <div className={styles.container}>
@@ -76,11 +78,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <img
-        src={randomImage()}
-        className={styles.background_image}
-        alt="Background image"
-      />
+      {randomImage && (
+        <img
+          src={randomImage}
+          className={styles.background_image}
+          alt="Background image"
+        />
+      )}
 
       <div className={styles.main}>
         <div className={styles.left}>
