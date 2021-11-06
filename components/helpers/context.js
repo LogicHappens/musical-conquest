@@ -66,6 +66,7 @@ export const Provider = ({ children }) => {
 
   // Load song from hash
   useEffect(() => {
+    if (currentSongHash === undefined) return
     const catalogItem = catalog.get(currentSongHash)
     setCurrentSong(catalogItem)
   }, [catalog, currentSongHash])
