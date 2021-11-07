@@ -51,3 +51,21 @@
       width: 100vw
       height: 100vh
       object-fit: cover
+
+.infos
+      position: fixed
+      right: 4px
+      top: 4px
+      z-index: 2
+      display: flex
+      flex-direction: column
+      align-items: flex-end
+      gap: 4px
+      &>*
+            border-radius: 5px
+            padding: 4px
+            background: white
+            opacity: 0.333
+            width: fit-content
+            &:hover
+                  opacity: 1

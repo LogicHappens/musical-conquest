@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 import { getRandomInt } from '@/lib/random'
 import GithubBadge from '@/components/github-badge'
+import Version from '@/components/version'
 
 export default function Home() {
   const { setAudio, currentSongHash, currentSong } = useContext(Context)
@@ -72,7 +73,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <GithubBadge />
+      <div className={styles.infos}>
+        <GithubBadge />
+        <Version />
+      </div>
 
       {randomImage && (
         <img
