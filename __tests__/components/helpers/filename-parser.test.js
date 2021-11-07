@@ -24,7 +24,7 @@ describe('musicFilenameParser', () => {
 
     it('has matching info', () => {
       expect(info).toMatchInlineSnapshot(`
-        Object {
+        Resource {
           "artist": "Chloe Stafler",
           "extension": "jpg",
           "filename": "Chloe Stafler - Si Jamais J'oublie by ZAZ (Piano Cover by Chloe Stafler) - bc736559378211bed4a6c0d1d4aff085_original - VTzZn3RKrJy",
@@ -45,7 +45,7 @@ describe('musicFilenameParser', () => {
 
     it('has matching info', () => {
       expect(info).toMatchInlineSnapshot(`
-        Object {
+        Resource {
           "artist": "30 Seconds to Mars",
           "extension": "mp3",
           "filename": "30 Seconds to Mars - Stronger (Kanye West cover) (Live BBC Radio 1 Live Lounge) - zJEy6UMCM2z",
