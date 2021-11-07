@@ -8,6 +8,7 @@ import { Howl } from 'howler'
 import { useRouter } from 'next/router'
 import { Context } from '../components/helpers/context'
 import { getRandomInt } from '@/lib/random'
+import GithubBadge from '@/components/github-badge'
 
 export default function Home() {
   const { setAudio, currentSongHash, currentSong } = useContext(Context)
@@ -70,6 +71,8 @@ export default function Home() {
         <meta name="description" content="Musical Conquest" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      <GithubBadge />
 
       {randomImage && (
         <img
