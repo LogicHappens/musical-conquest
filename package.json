@@ -1,6 +1,6 @@
 {
   "name": "musical-conquest",
-  "version": "0.1.0",
+  "version": "1.0.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -42,6 +42,6 @@
       "eslint --cache --fix",
       "jest --bail --findRelatedTests"
     ],
-    "*.{js,css,sass,scss,md,json}": "prettier --write"
+    "*.{js,css,scss,md,json}": "prettier --write"
   }
 }
