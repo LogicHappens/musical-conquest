@@ -1,5 +1,4 @@
 import styles from '../../styles/playlist.module.sass'
-import { SONGS_BASE_URL } from '../helpers/constants'
 
 const PlaylistSong = ({
   catalogEntry: { song: { artist = '', song = '' }, images } = {
@@ -13,14 +12,7 @@ const PlaylistSong = ({
       <span className={styles.song_name}>{song}</span>
       <span className={styles.song_image}>
         {images[0] && (
-          <img
-            width="20"
-            height="20"
-            alt="artist image"
-            src={
-              SONGS_BASE_URL + images[0].filename + '.' + images[0].extension
-            }
-          />
+          <img width="20" height="20" alt="artist image" src={images[0].url} />
         )}
       </span>
       <span className={styles.song_actions}>
