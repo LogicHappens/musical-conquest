@@ -70,9 +70,10 @@ export default function Home() {
       <Head>
         <title>Musical Conquest</title>
         <meta name="description" content="Musical Conquest" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="imgs/logo.svg" sizes="any" />
       </Head>
 
+      <div className={styles.logo}>Musical Conquest</div>
       <div className={styles.infos}>
         <GithubBadge />
         <Version />

@@ -1,6 +1,7 @@
 import { Provider } from '@/components/helpers/context'
 import Head from 'next/head'
 import '../styles/globals.css'
+import '../styles/generals.sass'
 
 function MyApp({ Component, pageProps }) {
   return (

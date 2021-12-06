@@ -1,5 +1,7 @@
 .player
-    background: #ccc
+    background: #fff
+    border: 2px solid #333
+    box-sizing: border-box
     display: flex
     flex-direction: column
     padding: 20px
@@ -7,16 +9,24 @@
     width: 100%
     &_screen
         background: pink
+        border: 2px solid #333
+        box-sizing: border-box
         &_songTimer
             width: 100%
             display: block
             padding: 10px
             background: #fff
+            border-bottom: 2px solid #333
+            box-sizing: border-box
+            font-weight: bold
         &_songInfo
             display: block
             padding: 10px
+            font-weight: 500
 
     &_controls
+        border: 2px solid #333
+        box-sizing: border-box
         background: white
         display: flex
         flex-wrap: wrap
@@ -37,7 +47,7 @@
             height: 30px
             &:hover
                 cursor: pointer
-                background-color: #f9f9f9
+                background-color: pink
 
         &_prev
             background: url(/icons/icons-prev.svg) no-repeat scroll center center transparent
@@ -95,14 +105,17 @@
                     border-radius: 5px
                     background: #ccc
                     cursor: pointer
-            &:hover
-                background-color: transparent !important
-            &:active
-                .slider
-                    background: #000
-                    &::-webkit-slider-thumb,
+
+                &:active
+                    background: pink
+                    &::-webkit-slider-thumb
+                        background: #000
                     &::-moz-range-thumb
                         background: #000
+
+            &:hover
+                background-color: transparent !important
+
 
 .icon
     width: 45px
@@ -125,14 +138,14 @@
         -webkit-appearance: none
         appearance: none
         width: 35px
-        height: 20px
+        height: 15px
         border-radius: 5px
-        background: #ddd
+        background: #000
         cursor: pointer
 
     &::-moz-range-thumb
         width: 35px
-        height: 20px
+        height: 15px
         border-radius: 5px
-        background: #ddd
+        background: #000
         cursor: pointer

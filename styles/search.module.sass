@@ -2,31 +2,36 @@
     padding: 20px
     box-sizing: border-box
     width: 100%
+    border: 2px solid #333
+    box-sizing: border-box
+    background: #fff
     input
+        border: 2px solid #333
+        box-sizing: border-box
+        border-radius: 5px
         width: 100%
         box-sizing: border-box
         padding: 10px 10px
         font-size: 16px
-        background: url(/icons/icons-search.svg) no-repeat scroll center right #eee
+        background: url(/icons/icons-search.svg) no-repeat scroll center right #fff
         outline: none
-        border: none
-        color: #ccc
+        color: #333
+        font-weight: 500
         //border: 1px solid #ccc
 
         &:hover,
         &:active
-
             background-color: #f7f7f7
         &:focus,
         &:active
-            background-color: #000
-            color: #fff
+            background-color: pink
+            color: #333
             &::placeholder
-                color: #ddd
+                color: #333
             //border: 1px solid #000
 
 .results
-    padding: 10px
+    padding: 10px 0
     box-sizing: border-box
     margin: 0
     list-style: none
@@ -38,11 +43,14 @@
         grid-template-columns: 1fr 1fr 60px
         grid-template-rows: 1fr
         grid-gap: 0 10px
-        border-bottom: 1px solid #ccc
-        padding: 5px 0
+        //border-bottom: 1px solid #ccc
+        padding: 5px 10px
+        border-radius: 5px
         align-items: center
         &:last-of-type
             border-bottom: none
+        &:hover
+            background: pink
         span
             &.result_actions
                 display: flex
@@ -58,32 +66,37 @@
                     display: flex
                     justify-content: center
                     align-items: center
-                    background-color: #f9f9f9 !important
+                    background-color: #fff !important
                     &:hover
                         cursor: pointer
                         background-color: #fff !important
                         filter: invert(100%)
 
     &_headers
+        background: #000
+        &:hover
+            background: #000 !important
         span
             font-size: 12px
             text-transform: uppercase
-            font-weight: bold
+            font-weight: 600
+            color: #fff
 .result
     &_artist,
     &_name
         font-size: 12px
+        font-weight: 500
     &_actions
         display: flex
         margin-left: auto
         a
             display: flex
-            color: #fff
+            color: #000
             width: 30px
             height: 30px
             justify-content: center
             align-items: center
-            background: #000
+            background: #fff
         &_add
             width: 30px
 
@@ -104,6 +117,7 @@
         justify-content: center
         gap: 10px
         button
+            font-size: 12px
             display: flex
             width: 40px
             height: 40px
@@ -114,7 +128,7 @@
             background-color: #fff !important
             &:hover
                 cursor: pointer
-                background-color: #f9f9f9 !important
+                background-color: pink !important
 
             &.pagination_first
                 background: url(/icons/icons-pagination-first.svg) no-repeat scroll center center

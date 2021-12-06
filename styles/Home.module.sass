@@ -1,3 +1,15 @@
+
+.logo
+      position: fixed
+      top: 20px
+      left: 20px
+      display: block
+      width: 50px
+      height: 50px
+      background: url(/imgs/logo.svg) no-repeat scroll center center transparent
+      z-index: 999
+      font-size: 0
+
 .container
       display: flex
       flex-direction: row
@@ -20,7 +32,7 @@
             align-items: flex-start
             box-sizing: border-box
             .wrapper, .right
-                  opacity: .5
+                  //opacity: .5
                   &:hover
                         opacity: 1
             .left
@@ -54,8 +66,8 @@
 
 .infos
       position: fixed
-      right: 4px
-      top: 4px
+      left: 20px
+      bottom: 20px
       z-index: 2
       display: flex
       flex-direction: column
@@ -69,3 +81,6 @@
             width: fit-content
             &:hover
                   opacity: 1
+      a
+            font-size: 12px
+            padding: 0
