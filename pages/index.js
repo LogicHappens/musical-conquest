@@ -62,7 +62,7 @@ export default function Home() {
     if (!currentSong?.images) return false
     const key = getRandomInt(0, currentSong?.images.length - 1)
     const image = currentSong?.images[key]
-    return image.url
+    return image?.url || ''
   }, [currentSong?.images])
 
   return (
@@ -70,7 +70,12 @@ export default function Home() {
       <Head>
         <title>Musical Conquest</title>
         <meta name="description" content="Musical Conquest" />
-        <link rel="icon" type="image/svg+xml" href="imgs/logo.svg" sizes="any" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="imgs/logo.svg"
+          sizes="any"
+        />
       </Head>
 
       <div className={styles.logo}>Musical Conquest</div>
