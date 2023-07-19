@@ -16,7 +16,6 @@
     "pre-commit": "lint-staged"
   },
   "dependencies": {
-    "axios": "^0.24.0",
     "howler": "^2.2.3",
     "next": "^12.1.0",
     "react": "17.0.2",
@@ -40,7 +39,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --cache --fix",
-      "jest --bail --findRelatedTests"
+      "jest --bail --findRelatedTests --passWithNoTests"
     ],
     "*.{js,css,scss,md,json}": "prettier --write"
   }

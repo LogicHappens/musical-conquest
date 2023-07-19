@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { createContext, useCallback, useEffect, useState } from 'react'
 import { SONGS_LOCAL_STORAGE_KEY, SONGS_URL } from './constants'
 import { musicFilenameParser } from './filename-parser'
@@ -44,10 +43,12 @@ export const Provider = ({ children }) => {
       const cataloguedSongs = catalogued(filenames)
       setCatalog(cataloguedSongs)
     } else {
-      axios.get(SONGS_URL).then(({ data }) => {
-        localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
-        const cataloguedSongs = catalogued(data)
-        setCatalog(cataloguedSongs)
+      fetch(SONGS_URL).then((response) => {
+        response.text().then((data) => {
+          localStorage.setItem(SONGS_LOCAL_STORAGE_KEY, data)
+          const cataloguedSongs = catalogued(data)
+          setCatalog(cataloguedSongs)
+        })
       })
     }
   }, [])
